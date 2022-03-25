@@ -1,7 +1,7 @@
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import react, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios';
 
 function App() {
@@ -35,38 +35,32 @@ function App() {
     setData(newDataValue);
   }
 
-  console.log('data state=====>', data)
+  // console.log('data state=====>', data)
 
   return (
     <div className="App">
-      {/* Heading all data */}
+      {/* Headling all data */}
       <h1 className='text-primary mt-5'>All Data</h1>
       <div className='container mt-3'>
         {data && data.map((el, index) => (
-          // {console.log(el.type)}
-          // <p>This apar</p>
-          // <div className='row'>
-          //   <div className='col-md-12'>
-          <div style={{ border: '1px solid blue', borderRadius: 5, marginBottom: 15 }}>
+          <div key={index} style={{ border: '1px solid blue', borderRadius: 5, marginBottom: 15 }}>
             <div className='m-5'>
               <h3 className='text-secondary'>{el.type + ' ' + (index + 1)}</h3>
               <hr />
               <div className='row'>
                 {el.columns && el.columns.map((e, i) => (
-                  <>
-                    <div className={`col-md-${e.width}`}>
-                      <div>
-                        <h1 className='mb-3'>{e.type}</h1>
-                        <a href={e.url} target='_blank'>
-                          <img src={e.imageUrl} className='mb-3' style={{ maxHeight: '65px' }} />
-                        </a>
-                        <div className='d-flex input-class'>
-                          <input className='form-control' name='title' placeholder='Edit title...' onChange={(event) => handleChange(event, i, index)} value={e.title} />
-                          <button className='btn btn-success mt-2' onClick={updateTitle} >Edit Title</button>
-                        </div>
+                  <div key={i} className={`col-md-${e.width}`}>
+                    <div>
+                      <h1 className='mb-3'>{e.type}</h1>
+                      <a href={e.url} rel="noreferrer" target='_blank'>
+                        <img src={e.imageUrl} alt={'sample'} className='mb-3' style={{ maxHeight: '65px' }} />
+                      </a>
+                      <div className='d-flex input-class'>
+                        <input className='form-control' name='title' placeholder='Edit title...' onChange={(event) => handleChange(event, i, index)} value={e.title} />
+                        <button className='btn btn-success mt-2' onClick={updateTitle} >Edit Title</button>
                       </div>
                     </div>
-                  </>
+                  </div>
                 ))}
               </div>
             </div>
